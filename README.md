@@ -119,3 +119,8 @@ objdump -Mintel -d `which dd` | grep fclose
     67e6:   e8 85 b9 ff ff     call   2170 <fclose@plt>
     681b:   e9 50 b9 ff ff     jmp    2170 <fclose@plt>
 ```
+
+we see the PID addresses are,
+- 0x555555554000
+- 0x681b
+
