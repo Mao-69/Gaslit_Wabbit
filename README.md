@@ -162,7 +162,7 @@ chmod +x wabbit.sh
 ```shell
 cp wabbit.sh wabbit
 ```
-
+now let's base64 encode it,
 ```shell
 cat wabbit | base64 -w0 ; echo
 ```
