@@ -9,7 +9,8 @@ first we get the syscall numbers for
 ```shell
 cat /usr/include/x86_64-linux-gnu/asm/unistd_64.h | grep memfd_create
 ```
-- ```shell #define __NR_memfd_create 319```
+- ```shell
+#define __NR_memfd_create 319```
 
 ```shell
 cat /usr/include/x86_64-linux-gnu/asm/unistd_64.h | grep pause
