@@ -120,7 +120,18 @@ objdump -Mintel -d `which dd` | grep fclose
     681b:   e9 50 b9 ff ff     jmp    2170 <fclose@plt>
 ```
 
+let's remove what we don't need,
+```shell
+setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12
+```
+- ```55555555400```
+
 we see the PID addresses are,
 - 0x555555554000
 - 0x681b
 
+now, let's create some variables that, will run a command that will locate the PID addresses and store only what we need from the output,
+
+
+pid_address_1=$(setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12)
+pid_address_2=$(objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4)
