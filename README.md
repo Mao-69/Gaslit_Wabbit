@@ -134,9 +134,11 @@ pid_address_2=$(objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep j
 
 we see the PID addresses are,
 - ```shell
-0x555555554000```
+0x555555554000
+```
 - ```shell
-0x681b```
+0x681b
+```
 
 now, let's create some variables that, will run a command that will locate the PID addresses and store only what we need from the output,
 
