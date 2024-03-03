@@ -198,7 +198,16 @@ sudo chmod +x gaslit_wabbit.sh
 ```shell
 sudo ./gaslit_wabbit.sh
 ```
-
+```
+dr-x------ 2 admin admin  0 Mar  3 19:15 .
+dr-xr-xr-x 9 admin admin  0 Mar  3 19:15 ..
+lr-x------ 1 admin admin 64 Mar  3 19:15 0 -> 'pipe:[15084]'
+lrwx------ 1 admin admin 64 Mar  3 19:15 1 -> /dev/pts/0
+lr-x------ 1 admin admin 64 Mar  3 19:15 10 -> 'pipe:[15084]'
+lrwx------ 1 admin admin 64 Mar  3 19:15 11 -> /dev/pts/0
+lrwx------ 1 admin admin 64 Mar  3 19:15 2 -> /dev/pts/0
+lrwx------ 1 admin admin 64 Mar  3 19:15 3 -> '/memfd:soCx (deleted)'
+```
 ```
 proc/949/fd/3: fork: retry: Resource temporarily unavailable
 /proc/949/fd/3: fork: retry: Resource temporarily unavailable
