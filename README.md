@@ -37,6 +37,13 @@ mov rax, 0x20
 syscall
 ```
 - create an in-memory-only file (syscall 319)
+```asm
+push 0x78436f73
+mov rdi, rsp
+mov rsi, 0
+mov rax, 319
+syscall
+```
 - suspend the process (syscall 34)
 - exit process (syscall 60) (should never be reached)
 
