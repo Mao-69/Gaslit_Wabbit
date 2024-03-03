@@ -1,8 +1,11 @@
 # Gaslit_Wabbit
 1978 wabbit fork bomb running in Ram
 
+cat /usr/include/x86_64-linux-gnu/asm/unistd_64.h | grep memfd_create
 
-### memfd.asm
+- #define __NR_memfd_create 319
+
+
 ```asm
 BITS 64
 global _start
