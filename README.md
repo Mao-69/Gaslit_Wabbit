@@ -87,3 +87,13 @@ exit:
         xor rdi, rdi
         syscall
 ```
+
+next, we nasm the assembly code and do a hexdump,
+
+```shell
+nasm memfd.asm
+```
+'''shell
+hexdump -v -e '"\\""x" 1/1 "%02x" ""' memfd
+'''
+
