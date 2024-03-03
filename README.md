@@ -138,9 +138,7 @@ we see the PID addresses are,
 
 now, let's put that into some variables,
 
-```shell
+```bash
 pid_address_1=$(setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12)
-```
-```shell
 pid_address_2=$(objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4)
 ```
