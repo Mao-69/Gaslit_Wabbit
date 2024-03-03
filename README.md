@@ -114,8 +114,8 @@ setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd"
 ```shell
 objdump -Mintel -d `which dd` | grep fclose
 ```
-- ```shell
+```shell
 0000000000002170 <fclose@plt>:
-    67e6:       e8 85 b9 ff ff          call   2170 <fclose@plt>
-    681b:       e9 50 b9 ff ff          jmp    2170 <fclose@plt>
+    67e6:   e8 85 b9 ff ff     call   2170 <fclose@plt>
+    681b:   e9 50 b9 ff ff     jmp    2170 <fclose@plt>
 ```
