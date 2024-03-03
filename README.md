@@ -1,12 +1,25 @@
 # Gaslit_Wabbit
 1978 wabbit fork bomb running in Ram
 
+first we get the syscall numbers for
+- memfd_create
+- pause
+- exit
+
 ```shell
 cat /usr/include/x86_64-linux-gnu/asm/unistd_64.h | grep memfd_create
 ```
 ```shell
 #define __NR_memfd_create 319
 ```
+
+```shell
+cat /usr/include/x86_64-linux-gnu/asm/unistd_64.h | grep pause
+```
+```shell
+#define __NR_pause 34
+```
+
 
 ```asm
 BITS 64
