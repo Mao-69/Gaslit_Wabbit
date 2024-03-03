@@ -111,6 +111,12 @@ setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd"
 55555556a000-55555556b000 rw-p 00015000 ca:01 262762      /usr/bin/dd
 ```
 
+let's remove what we don't need,
+```shell
+setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12
+```
+- ```55555555400```
+
 ```shell
 objdump -Mintel -d `which dd` | grep fclose
 ```
@@ -119,12 +125,6 @@ objdump -Mintel -d `which dd` | grep fclose
     67e6:   e8 85 b9 ff ff     call   2170 <fclose@plt>
     681b:   e9 50 b9 ff ff     jmp    2170 <fclose@plt>
 ```
-
-let's remove what we don't need,
-```shell
-setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12
-```
-- ```55555555400```
 
 we see the PID addresses are,
 - 0x555555554000
