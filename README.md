@@ -25,7 +25,7 @@ cat /usr/include/x86_64-linux-gnu/asm/unistd_64.h | grep exit
 
 next we create some assembly that will
 - duplicate FDs: 10 and 11
-```shell
+```asm
 xor rax, rax
 xor rdi, rdi
 mov di, 10
