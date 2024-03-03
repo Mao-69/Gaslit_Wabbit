@@ -136,8 +136,11 @@ we see the PID addresses are,
 - ```0x555555554000```
 - ```0x681b```
 
-now, let's create some variables that, will run a command that will locate the PID addresses and store only what we need from the output,
+now, let's put that into some variables,
 
-
+```shell
 pid_address_1=$(setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12)
+```
+```shell
 pid_address_2=$(objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4)
+```
