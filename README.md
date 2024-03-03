@@ -129,7 +129,7 @@ objdump -Mintel -d `which dd` | grep fclose
 let's remove what we don't need,
 
 ```shell
-pid_address_2=$(objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4)
+objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4
 ```
 - ```681b```
 
