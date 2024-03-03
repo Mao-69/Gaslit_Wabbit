@@ -22,6 +22,13 @@ cat /usr/include/x86_64-linux-gnu/asm/unistd_64.h | grep exit
 - ```#define __NR_exit 60```
 
 
+
+next we create some assembly that will
+- duplicate FDs: 10 and 11
+- create an in-memory-only file (syscall 319)
+- suspend the process (syscall 34)
+- exit process (syscall 60) (should never be reached)
+
 ```asm
 BITS 64
 global _start
