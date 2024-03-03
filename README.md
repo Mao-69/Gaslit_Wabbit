@@ -198,3 +198,23 @@ sudo chmod +x gaslit_wabbit.sh
 ```shell
 sudo ./gaslit_wabbit.sh
 ```
+
+```
+proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+/proc/949/fd/3: fork: retry: Resource temporarily unavailable
+```
