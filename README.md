@@ -25,6 +25,17 @@ cat /usr/include/x86_64-linux-gnu/asm/unistd_64.h | grep exit
 
 next we create some assembly that will
 - duplicate FDs: 10 and 11
+```shell
+xor rax, rax
+xor rdi, rdi
+mov di, 10
+mov rax, 0x20
+syscall
+xor rax, rax
+inc rdi
+mov rax, 0x20
+syscall
+```
 - create an in-memory-only file (syscall 319)
 - suspend the process (syscall 34)
 - exit process (syscall 60) (should never be reached)
