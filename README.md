@@ -45,6 +45,10 @@ mov rax, 319
 syscall
 ```
 - suspend the process (syscall 34)
+```asm
+mov rax, 34
+syscall
+```
 - exit process (syscall 60) (should never be reached)
 
 ```asm
