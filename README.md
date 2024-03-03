@@ -50,6 +50,13 @@ mov rax, 34
 syscall
 ```
 - exit process (syscall 60) (should never be reached)
+```asm
+xor rax, rax
+add rax, 60
+xor rdi, rdi
+syscall
+```
+putting it all together:
 
 ```asm
 BITS 64
