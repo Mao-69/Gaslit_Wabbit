@@ -125,6 +125,12 @@ objdump -Mintel -d `which dd` | grep fclose
     67e6:   e8 85 b9 ff ff     call   2170 <fclose@plt>
     681b:   e9 50 b9 ff ff     jmp    2170 <fclose@plt>
 ```
+let's remove what we don't need,
+
+```shell
+pid_address_2=$(objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4)
+```
+- ```681b```
 
 we see the PID addresses are,
 - 0x555555554000
