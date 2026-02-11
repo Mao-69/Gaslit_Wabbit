@@ -109,11 +109,6 @@ setarch x86_64 -R dd if=/proc/self/maps 2>/dev/null | awk '/\/bin\/dd/ { split($
 ```shell
 objdump -d --section=.text "$(which dd)" | awk '/<fclose@plt>/ && /jmp/ { sub(/:/,"",$1); print $1 }'
 ```
-```shell
-0000000000002170 <fclose@plt>:
-    67e6:   e8 85 b9 ff ff     call   2170 <fclose@plt>
-    681b:   e9 50 b9 ff ff     jmp    2170 <fclose@plt>
-```
 - ```6c03```
 
 we see the PID addresses are,
