@@ -104,7 +104,7 @@ next, we find the PID addresses for DD fclose,
 ```shell
 setarch x86_64 -R dd if=/proc/self/maps 2>/dev/null | awk '/\/bin\/dd/ { split($1,a,"-"); print a[1]; exit }'
 ```
-- ```55555555400```
+- ```555555554000```
 
 ```shell
 objdump -d --section=.text "$(which dd)" | awk '/<fclose@plt>/ && /jmp/ { sub(/:/,"",$1); print $1 }'
